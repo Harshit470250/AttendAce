@@ -1,10 +1,9 @@
 import 'package:attendace/services/Course_detals.dart';
 import 'package:flutter/material.dart';
 import 'package:attendace/services/passing_argument.dart';
-import 'package:attendace/services/Courses_list.dart';
 import 'package:attendace/main.dart';
 import 'package:attendace/services/functions.dart';
-import 'package:numberpicker/numberpicker.dart';
+
 
 class course extends StatefulWidget {
   const course({Key? key}) : super(key: key);
@@ -30,11 +29,11 @@ class _courseState extends State<course> {
        actions: [
          IconButton(onPressed: () {
            Navigator.pushReplacementNamed(context,'/');
-         }, icon: Icon(Icons.chevron_left_sharp))
+         }, icon: const Icon(Icons.chevron_left_sharp))
        ],
      ),
       body: SingleChildScrollView(
-        physics: ScrollPhysics(),
+        physics: const ScrollPhysics(),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -42,50 +41,72 @@ class _courseState extends State<course> {
               padding: const EdgeInsets.fromLTRB(4.0, 6.0, 4.0, 0.0),
               child: Column(
                 children: [
+                  const SizedBox(height: 15.0),
+                  const Row(
+                    children: [
+                      Text('Attendance Details',
+                       style: TextStyle(
+                         fontSize: 20.0
+                       ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(height: 10.0),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Total no. of Classes:',
+                      const Text('Total no. of Classes:',
                         style: TextStyle(
-                          fontSize: 20.0,
+                          fontSize: 17.0,
+                            color: Colors.black54
                         ),
 
                       ),
                       Text('${box.get(6 + data.current_index).Total_Classes}',
-                      style: TextStyle(
-                        fontSize: 20.0,
+                      style: const TextStyle(
+                        fontSize: 17.0,
+                          color: Colors.black54
                       ),
                       ),
                     ],
                   ),
+                  // SizedBox(height: 10.0),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     const Text('Total no. of classes happened:',
+                  //       style: TextStyle(
+                  //           fontSize: 17.0,
+                  //           color: Colors.black54
+                  //       ),
+                  //     ),
+                  //     Text('${box.get(6 + data.current_index).Classes_yet}',
+                  //     style: const TextStyle(
+                  //         fontSize: 17.0,
+                  //         color: Colors.black54
+                  //     ),
+                  //     )
+                  //   ],
+                  // ),
+
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text('Total no. of classes happened:',
+                      const Text('Classes attended:',
                         style: TextStyle(
-                          fontSize: 20.0,
+                            fontSize: 17.0,
+                            color: Colors.black54
                         ),
                       ),
-                      Text('${box.get(6 + data.current_index).Classes_yet}',
-                      style: TextStyle(
-                        fontSize: 20.0,
-                      ),
-                      )
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Classes attended:',
-                        style: TextStyle(
-                          fontSize: 20.0,
+                      SizedBox(width: 110.0),
+                      Text('${box.get(6 + data.current_index).Classes_present_in}',
+                        style: const TextStyle(
+                            fontSize: 17.0,
+                            color: Colors.black54
                         ),
                       ),
-                      Text('${box.get(6 + data.current_index).Classes_present_in}'),
-                      Column(
-                        children: [
                           IconButton(
-                              icon: Icon(Icons.arrow_upward),
+                              icon: const Icon(Icons.arrow_upward),
                             onPressed: () {
                                 setState(() {
                                   Course updatedCourse = box.get(6 + data.current_index);
@@ -95,7 +116,7 @@ class _courseState extends State<course> {
                             },
                           ),
                           IconButton(
-                            icon: Icon(Icons.arrow_downward),
+                            icon: const Icon(Icons.arrow_downward),
                             onPressed: () {
                               setState(() {
                                 Course updatedCourse = box.get(6 + data.current_index);
@@ -103,8 +124,6 @@ class _courseState extends State<course> {
                                 box.put(6 + data.current_index, updatedCourse);
                               });
                             },
-                          )
-                        ],
                       ),
                       // TextButton(
                       //   child: Text('${box.get(6 + data.current_index).Classes_present_in}'),
@@ -155,46 +174,51 @@ class _courseState extends State<course> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('% of classes attended(out of total):',
+                      const Text('Percentage of classes attended:',
                         style: TextStyle(
-                          fontSize: 20.0,
+                            fontSize: 17.0,
+                            color: Colors.black54
                         ),
                       ),
-                      Text('${box.get(6 + data.current_index).Classes_present_in/box.get(6 + data.current_index).Total_Classes*100}%',
-                        style: TextStyle(
-                          fontSize: 20.0,
+                      Text('${(box.get(6 + data.current_index).Classes_present_in/box.get(6 + data.current_index).Total_Classes*100).toInt()}%',
+                        style: const TextStyle(
+                            fontSize: 17.0,
+                            color: Colors.black54
                         ),
                         ),
                     ],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     Text('% of classes attended(as of yet):',
+                  //       style: TextStyle(
+                  //         fontSize: 20.0,
+                  //       ),
+                  //     ),
+                  //     Text('${box.get(6 + data.current_index).Classes_present_in/box.get(6 + data.current_index).Classes_yet*100}%',
+                  //       style: TextStyle(
+                  //         fontSize: 20.0,
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  const SizedBox(height: 20.0),
+                  const Row(
                     children: [
-                      Text('% of classes attended(as of yet):',
-                        style: TextStyle(
-                          fontSize: 20.0,
-                        ),
+                      Text('Class timings:',
+                      style: TextStyle(
+                        fontSize: 20.0,
                       ),
-                      Text('${box.get(6 + data.current_index).Classes_present_in/box.get(6 + data.current_index).Classes_yet*100}%',
-                        style: TextStyle(
-                          fontSize: 20.0,
-                        ),
                       ),
                     ],
-                  ),
-                  SizedBox(height: 20.0),
-                  Text('Class timings:',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20.0,
-                  ),
                   )
                 ],
               ),
             ),
             ListView.builder(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: box.get(6 + data.current_index).Time_course.length,
               itemBuilder: (context, index) {
                 return Padding(
@@ -203,34 +227,42 @@ class _courseState extends State<course> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        DropdownButton(
-                          value: box.get(6 + data.current_index).Time_course[index].Day,
-                          onChanged: ( dynamic? value) {
-                            setState(() {
-                              Course change_course = box.get(6 + data.current_index);
-                              box.delete(6 + data.current_index);
-                              change_course.Time_course[index].Day = value!;
-                              box.put(6 + data.current_index, change_course);
-                            });
-                          },
-                          items: day.map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: DropdownButton(
+                            value: box.get(6 + data.current_index).Time_course[index].Day,
+                            onChanged: ( dynamic? value) {
+                              setState(() {
+                                Course change_course = box.get(6 + data.current_index);
+                                box.delete(6 + data.current_index);
+                                change_course.Time_course[index].Day = value!;
+                                box.put(6 + data.current_index, change_course);
+                              });
+                            },
+                            items: day.map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          ),
                         ),
                         TextButton(
-                          child: Text('${box.get(6 + data.current_index).Time_course[index].Starting_Time.hour}:${box.get(6 + data.current_index).Time_course[index].Starting_Time.minute}',
-                            style: TextStyle(
+                          child: box.get(6 + data.current_index).Time_course[index].Starting_Time.minute > 10 ?
+                          Text('${box.get(6 + data.current_index).Time_course[index].Starting_Time.hour%12}:${box.get(6 + data.current_index).Time_course[index].Starting_Time.minute}',
+                            style: const TextStyle(
+                              fontSize: 20.0,
+                            ),
+                          ):
+                          Text('${box.get(6 + data.current_index).Time_course[index].Starting_Time.hour%12}:0${box.get(6 + data.current_index).Time_course[index].Starting_Time.minute}',
+                            style: const TextStyle(
                               fontSize: 20.0,
                             ),
                           ),
                           onPressed: () async{
                             TimeOfDay? newTime = await  showTimePicker(context: context,
                                 initialTime: TimeOfDay(hour: box.get(6 + data.current_index).Time_course[index].Starting_Time.hour,
-                                    minute: box.get(6 + data.current_index).Time_course[index].Starting_Time.minute));
-                                // initialTime: box.get(6 + data.current_index).Time_course[index].Starting_Time);
+                                    minute: box.get(6 + data.current_index).Time_course[index].Starting_Time.minute));;
 
                             if(newTime == null) return;
                             setState(() {
@@ -244,8 +276,15 @@ class _courseState extends State<course> {
                         ),
 
                         TextButton(
-                          child: Text('${box.get(6 + data.current_index).Time_course[index].Ending_Time.hour}:${box.get(6 + data.current_index).Time_course[index].Ending_Time.minute}',
-                            style: TextStyle(
+                          child: box.get(6 + data.current_index).Time_course[index].Ending_Time.minute > 10 ?
+                          Text('${box.get(6 + data.current_index).Time_course[index].Ending_Time.hour%12}:${box.get(6 + data.current_index).Time_course[index].Ending_Time.minute}'
+                            ,
+                            style: const TextStyle(
+                              fontSize: 20.0,
+                            ),
+                          ) :
+                          Text('${box.get(6 + data.current_index).Time_course[index].Ending_Time.hour%12}:0${box.get(6 + data.current_index).Time_course[index].Ending_Time.minute}',
+                            style: const TextStyle(
                               fontSize: 20.0,
                             ),
                           ),
@@ -253,7 +292,6 @@ class _courseState extends State<course> {
                             TimeOfDay? newTime = await  showTimePicker(context: context,
                                 initialTime: TimeOfDay(hour: box.get(6 + data.current_index).Time_course[index].Ending_Time.hour,
                                     minute: box.get(6 + data.current_index).Time_course[index].Ending_Time.minute));
-                            // print(listOfCourses[data.current_index].Time_course[index].Ending_Time);
                             if(newTime == null) return;
                             setState(() {
                               Course changed_course = box.get(6 + data.current_index);
@@ -264,16 +302,14 @@ class _courseState extends State<course> {
                           },
                         ),
                         IconButton(
-                          icon: Icon(Icons.cancel_outlined),
+                          icon: const Icon(Icons.cancel_outlined),
                           onPressed: () {
                             setState(() {
                               Course changed_course = box.get(6 + data.current_index);
                               changed_course.Time_course.removeAt(index);
                               changed_course.Total_Classes = total_number_of_classes(box.get(StartingDate), box.get(EndingDate), changed_course.Time_course);
                               box.put(6 + data.current_index, changed_course);
-                              // box.get(listOfCourses)[data.current_index].Time_course.remove(box.get(listOfCourses)[data.current_index].Time_course[index]);
                             });
-                            // print(listOfCourses[data.current_index].Time_course.length);
                           },
                         )
 
@@ -284,7 +320,7 @@ class _courseState extends State<course> {
               },
               ),
             TextButton(
-                child: Text('Add Class',
+                child: const Text('Add Class',
                   style:  TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold
@@ -297,16 +333,9 @@ class _courseState extends State<course> {
                   bool isTimeCorrect = true;
                   Timings New_class_Timings = await showDialog(context: context,
                       builder: (BuildContext context) {
-                        // var height = MediaQuery.of(context).size.height;
-                        // var width = MediaQuery.of(context).size.width;
                         return StatefulBuilder(builder: (context, setState)
                         {
                           return AlertDialog(
-                                // insetPadding: EdgeInsets.all(5.0),
-                                // contentPadding: EdgeInsets.all(5.0),
-                                // clipBehavior: Clip.antiAliasWithSaveLayer,
-                                // height:400,
-                                // width: width - 400,
                                 title: const Text('Enter the Class Timing Details:'),
                                 content: Container(
                                   width: 250,
@@ -318,13 +347,11 @@ class _courseState extends State<course> {
                                         mainAxisAlignment: MainAxisAlignment
                                             .spaceBetween,
                                         children: [
-                                          Text('Day:'),
+                                          const Text('Day:'),
                                           DropdownButton(
                                             value: Day_of_new_class,
                                             onChanged: (String? value) {
-                                              // listOfCourses[data.current_index].Time_course[index].Day = value!;
                                               setState(() {
-                                                // print(listOfCourses);
                                                 Day_of_new_class = value!;
                                               });
                                             },
@@ -344,8 +371,15 @@ class _courseState extends State<course> {
                                         children: [
                                           const Text('Starting Time of the Class:'),
                                           TextButton(
-                                            child: Text('${Starting_time_of_new_class
+                                            child: Starting_time_of_new_class.minute > 10?
+                                            Text('${Starting_time_of_new_class
                                                 .hour}:${Starting_time_of_new_class
+                                                .minute}',
+                                              style: const TextStyle(
+                                                fontSize: 20.0,
+                                              ),
+                                            ):Text('${Starting_time_of_new_class
+                                                .hour}:0${Starting_time_of_new_class
                                                 .minute}',
                                               style: const TextStyle(
                                                 fontSize: 20.0,
@@ -368,12 +402,19 @@ class _courseState extends State<course> {
                                         mainAxisAlignment: MainAxisAlignment
                                             .spaceBetween,
                                         children: [
-                                          Text('Ending Time of the Class:'),
+                                          const Text('Ending Time of the Class:'),
                                           TextButton(
-                                            child: Text('${Ending_time_of_new_class
+                                            child: Ending_time_of_new_class.minute > 10 ?
+                                            Text('${Ending_time_of_new_class
                                                 .hour%12}:${Ending_time_of_new_class
                                                 .minute}',
-                                              style: TextStyle(
+                                              style: const TextStyle(
+                                                fontSize: 20.0,
+                                              ),
+                                            ):Text('${Ending_time_of_new_class
+                                                .hour%12}:0${Ending_time_of_new_class
+                                                .minute}',
+                                              style: const TextStyle(
                                                 fontSize: 20.0,
                                               ),
                                             ),
@@ -390,14 +431,14 @@ class _courseState extends State<course> {
                                           ),
                                         ],
                                       ),
-                                      isTimeCorrect ? SizedBox(height: 10.0) : Text('Ending time must be after the Starting time',
+                                      isTimeCorrect ? const SizedBox(height: 10.0) : const Text('Ending time must be after the Starting time',
                                         style: TextStyle(
                                             fontSize: 10.0,
                                             color: Colors.red
                                         ),
                                       ),
                                       TextButton(
-                                        child: Text('Submit'),
+                                        child: const Text('Submit'),
                                         onPressed: () {
                                           if(isAfterTime(Ending_time_of_new_class,Starting_time_of_new_class )) {
                                             Timings New_class_time = Timings(
@@ -408,8 +449,6 @@ class _courseState extends State<course> {
                                                 Ending_Time: TimeofDay(
                                                     hour: Ending_time_of_new_class.hour,
                                                     minute: Ending_time_of_new_class.minute));
-                                            // new_course_timings.add(New_class_time);
-                                            // print(New_class_time.Day);
                                             Navigator.pop(context, New_class_time);
                                           }
                                           else{
@@ -433,7 +472,6 @@ class _courseState extends State<course> {
                     updatedCourse.Time_course.add(New_class_Timings);
                     updatedCourse.Total_Classes = total_number_of_classes(box.get(StartingDate ), box.get(EndingDate), updatedCourse.Time_course);
                     box.put(6 + data.current_index,updatedCourse);
-                    // new_course_timings.add(New_class_Timings);
                   });
                 }
             ),

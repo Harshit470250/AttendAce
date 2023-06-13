@@ -1,15 +1,12 @@
 import 'dart:io';
-
+// import 'dart:js_interop';
 import 'package:flutter/material.dart';
 import 'package:attendace/services/Course_detals.dart';
-import 'package:attendace/Pages/editing_details.dart';
 import 'package:attendace/services/functions.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:attendace/main.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
-import 'package:attendace/Pages/initial_page.dart';
-
 import '../Pages/home.dart';
 
 location classes_location = location(latitude: 29.864724653518113, longitude: 77.89394727853104,address: 'LHC');
@@ -28,11 +25,6 @@ String Weekday_day (int num)
   else return '';
 }
 
-// Future<List<int>> _readDocumentData() async {
-//   final ByteData data = await rootBundle.load(pickedFile!);
-//   // final ByteData data = await File(pickedFile!)  ;
-//   return data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
-// }
 
 List<String> course_code(List<String> invoiceNumber)
 {
@@ -84,28 +76,15 @@ List<String> course_name(List<String> invoiceNumber)
   return SubjectName;
 }
 
-
-
-
 Future<void> generateTimeTable() async
 {
-  // PdfDocument document =
-  // PdfDocument(inputBytes: await _readDocumentData());
 
-//Create a new instance of the PdfTextExtractor.
   PdfTextExtractor extractor = PdfTextExtractor(pickedFilePdf!);
-  print('anything');
-  // PdfTextExtractor extractor = PdfTextExtractor(inputBytes: await _readDocumentData());
 
     List<TextLine> result = extractor.extractTextLines(startPageIndex: 0);
-    if(result == [])
-      {
-        print('pdf');
-      }
-  //
-  // else{
-    Rect textBoundsForCode = const Rect.fromLTWH(00, 400, 100, 1000);
-    Rect textBoundsForName = const Rect.fromLTWH(100, 400, 150, 1000);
+
+    Rect textBoundsForCode = const Rect.fromLTWH(00, 370, 100, 1000);
+    Rect textBoundsForName = const Rect.fromLTWH(100, 370, 150, 1000);
 
     List<String> invoiceNumberCode = [];
     List<String> invoiceNumberName = [];
@@ -159,7 +138,6 @@ Future<void> generateTimeTable() async
       if (lectureInstance.isEmpty) {
         continue;
       } else {
-        // print(lectureInstance);
         int indexOfCourse = indexOfLectureInstance(lectureInstance, CourseCode);
         if (indexOfCourse == -1) {
           continue;
@@ -200,12 +178,21 @@ Future<void> generateTimeTable() async
     }
 
     box.put(NumberOfCourses, List_of_readed_data.length);
-  }
-// }
+    // final number_of_course = FirebaseFirestore.instance.collection('asdf').doc('my-id');
+    // final json = {
+    //   'numCourse': List_of_readed_data.length
+    // };
+    // await number_of_course.set(json);
+}
+
 
 int indexOfLectureInstance(List<String> lectureInstance, List<String> CourseCode)
 {
   int index = -1;
+  print(lectureInstance);
+  if(lectureInstance.length < 5){
+    return -1;
+  }
 
   String CourseCodeFind = lectureInstance[2] + lectureInstance[3] + lectureInstance[4];
 
